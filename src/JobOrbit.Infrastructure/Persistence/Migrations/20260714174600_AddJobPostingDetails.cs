@@ -1,0 +1,40 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace JobOrbit.Infrastructure.Persistence.Migrations
+{
+    /// <inheritdoc />
+    public partial class AddJobPostingDetails : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.AddColumn<string>(
+                name: "Requirements",
+                table: "JobPostings",
+                type: "nvarchar(max)",
+                maxLength: 8000,
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Responsibilities",
+                table: "JobPostings",
+                type: "nvarchar(max)",
+                maxLength: 8000,
+                nullable: true);
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropColumn(
+                name: "Requirements",
+                table: "JobPostings");
+
+            migrationBuilder.DropColumn(
+                name: "Responsibilities",
+                table: "JobPostings");
+        }
+    }
+}

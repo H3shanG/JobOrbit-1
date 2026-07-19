@@ -1,0 +1,19 @@
+import { useCallback, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import DashboardLayout from '../components/dashboard/DashboardLayout'
+import ManagerSidebar from '../components/manager/ManagerSidebar'
+import ManagerNavbar from '../components/manager/ManagerNavbar'
+import { useAuth } from '../context/AuthContext'
+import { createHiringDecision, getHiringDecision, updateHiringDecision } from '../services/hiringDecisionService'
+import styles from './HiringManagerCandidates.module.css'
+
+export default function HiringDecisionDetails() {
+  const { applicationId } = useParams()
+  const [open, setOpen] = useState(false), [data, setData] = useState(null), [notes, setNotes] = useState('')
+  const [loading, setLoading] = useState(true), [busy, setBusy] = useState(false), [error, setError] = useState(''), [success, setSuccess] = useState('')
+  const { user, logout } = useAuth(), navigate = useNavigate()
+  const load = useCallback(() => { const controller = new AbortController(); setLoading(true); getHiringDecision(applicationId, controller.signal).then(value => { setData(value); setNotes(value.decisionNotes || '') }).catch(e => setError(e.response?.status === 404 ? 'Decision record not found.' : 'Could not load decision.')).finally(() => setLoading(false)); return () => controller.abort() }, [applicationId])
+  useEffect(() => load(), [load])
+  async function decide(decision) { if ((decision === 'Hire' || decision === 'Reject') && !window.confirm(`Confirm ${decision} decision? This cannot be reversed.`)) return; setBusy(true); setError(''); setSuccess(''); try { const payload = { decision, notes }; const saved = data.decision === 'Hold' ? await updateHiringDecision(applicationId, payload) : await createHiringDecision(applicationId, payload); setData(saved); setSuccess(`${decision} decision saved.`) } catch (e) { setError(e.response?.data?.title || 'Could not save decision.') } finally { setBusy(false) } }
+  return <DashboardLayout sidebar={<ManagerSidebar isOpen={open} onClose={() => setOpen(false)} onLogout={() => { logout(); navigate('/login') }}/>} navbar={<ManagerNavbar user={user} onMenuClick={() => setOpen(true)}/>}><button className={styles.back} onClick={() => navigate(`/manager/candidates/${applicationId}`)}>← Back to Candidate</button>{loading ? <div className={styles.state}>Loading decision…</div> : data && <><header className={styles.detailHeader}><div><span className={styles.badge}>{data.decision}</span><h1>{data.candidateName}</h1><p>{data.professionalTitle || 'Candidate'} · {data.jobTitle}</p></div></header><div className={styles.detailGrid}><main><section><h2>Evaluation Summary</h2><p><b>Overall score:</b> {data.overallScore}/10</p><p><b>Recommendation:</b> {data.recommendation}</p>{data.evaluations.map(x => <article key={x.evaluationId}><h3>{x.evaluatorName} · {x.overallScore}/10</h3><p>{x.comments || 'No comments'}</p></article>)}</section><section><h2>Hiring Decision</h2><textarea rows="5" maxLength="4000" value={notes} onChange={e => setNotes(e.target.value)} placeholder="Decision notes"/>{error && <div className={styles.error}>{error}</div>}{success && <p>{success}</p>}<div className={styles.actions}>{!data.isFinal && <><button disabled={busy} onClick={() => decide('Hire')}>Hire</button><button disabled={busy} onClick={() => decide('Reject')}>Reject</button><button disabled={busy} onClick={() => decide('Hold')}>Hold</button></>}</div></section></main><aside><section><h2>Application</h2><p>Status: {data.applicationStatus}</p><p>Interview: {data.interviewStatus || 'Not available'}</p>{data.interviewDate && <p>{new Date(data.interviewDate).toLocaleString()}</p>}</section><section><h2>Current Decision</h2><p>{data.decision}</p>{data.decidedBy && <p>By {data.decidedBy}</p>}{data.decidedAt && <p>{new Date(data.decidedAt).toLocaleString()}</p>}<p>{data.decisionNotes || 'No notes'}</p></section></aside></div></>}</DashboardLayout>
+}

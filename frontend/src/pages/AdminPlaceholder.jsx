@@ -1,0 +1,1 @@
+import{useNavigate}from'react-router-dom';export default function AdminPlaceholder(){const n=useNavigate();return <main style={{padding:32}}><h1>Admin Module</h1><p>This administration page will be implemented in a later task.</p><button onClick={()=>n('/admin/dashboard')}>Back to Dashboard</button></main>}

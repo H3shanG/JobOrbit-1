@@ -1,0 +1,2 @@
+import { useNavigate, useParams } from 'react-router-dom'
+export default function HiringManagerEvaluationPlaceholder() { const navigate = useNavigate(), { applicationId } = useParams(); return <main style={{ padding: 32 }}><h1>Candidate Evaluation</h1><p>The evaluation form will be implemented in a later task.</p><button onClick={() => navigate(`/manager/candidates/${applicationId}`)}>Back to candidate</button></main> }

@@ -1,0 +1,2 @@
+using JobOrbit.Application.DTOs.HiringManagerReports;using JobOrbit.Application.Interfaces;
+namespace JobOrbit.Application.Services;public sealed class HiringManagerReportService(IHiringManagerReportRepository repository):IHiringManagerReportService{public Task<HiringManagerReportDataDto?>GetAsync(int userId,HiringManagerReportFilter filter,CancellationToken token=default)=>repository.GetAsync(userId,filter,token);}

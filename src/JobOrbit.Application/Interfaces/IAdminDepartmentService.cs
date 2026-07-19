@@ -1,0 +1,1 @@
+using JobOrbit.Application.DTOs.AdminDepartments;namespace JobOrbit.Application.Interfaces;public interface IAdminDepartmentService:IAdminDepartmentRepository{}

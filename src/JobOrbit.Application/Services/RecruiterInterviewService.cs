@@ -1,0 +1,6 @@
+using JobOrbit.Application.DTOs.Jobs;using JobOrbit.Application.DTOs.RecruiterInterviews;using JobOrbit.Application.Interfaces;
+namespace JobOrbit.Application.Services;
+public sealed class RecruiterInterviewService(IRecruiterInterviewRepository repository):IRecruiterInterviewService
+{
+ public Task<(RecruiterInterviewOutcome Outcome,int? InterviewId)>CreateAsync(int u,CreateInterviewRequest r,CancellationToken t=default)=>repository.CreateAsync(u,r,t);public Task<PagedResultDto<RecruiterInterviewListItemDto>>ListAsync(int u,RecruiterInterviewQuery q,CancellationToken t=default){q.Page=Math.Max(1,q.Page);q.PageSize=Math.Clamp(q.PageSize,1,50);return repository.ListAsync(u,q,t);}public Task<RecruiterInterviewDetailsDto?>DetailsAsync(int u,int i,CancellationToken t=default)=>repository.DetailsAsync(u,i,t);public Task<RecruiterInterviewOutcome>UpdateAsync(int u,int i,UpdateInterviewRequest r,CancellationToken t=default)=>repository.UpdateAsync(u,i,r,t);public Task<RecruiterInterviewOutcome>CancelAsync(int u,int i,CancellationToken t=default)=>repository.CancelAsync(u,i,t);public Task<RecruiterInterviewOutcome>CompleteAsync(int u,int i,CancellationToken t=default)=>repository.CompleteAsync(u,i,t);public Task<IReadOnlyList<ShortlistedApplicationDto>>ShortlistedAsync(int u,CancellationToken t=default)=>repository.ShortlistedAsync(u,t);
+}

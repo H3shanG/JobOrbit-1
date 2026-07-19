@@ -1,0 +1,3 @@
+using JobOrbit.Application.DTOs.HiringDecisions;using JobOrbit.Application.DTOs.Jobs;
+namespace JobOrbit.Application.Interfaces;
+public interface IHiringDecisionService { Task<PagedResultDto<HiringDecisionListItemDto>>ListAsync(int userId,HiringDecisionQuery query,CancellationToken token=default);Task<HiringDecisionDetailsDto?>DetailsAsync(int userId,int applicationId,CancellationToken token=default);Task<HiringDecisionMutationResult>CreateAsync(int userId,int applicationId,CreateHiringDecisionRequest request,CancellationToken token=default);Task<HiringDecisionMutationResult>UpdateAsync(int userId,int applicationId,UpdateHiringDecisionRequest request,CancellationToken token=default);Task<HiringFunnelDto>FunnelAsync(int userId,CancellationToken token=default);}

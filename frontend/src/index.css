@@ -1,0 +1,64 @@
+:root {
+  --color-charcoal: #1f2937;
+  --color-charcoal-dark: #111827;
+  --color-lime: #a3e635;
+  --color-lime-hover: #84cc16;
+  --color-primary: var(--color-charcoal);
+  --color-primary-hover: var(--color-charcoal-dark);
+  --color-primary-foreground: #ffffff;
+  --color-accent: var(--color-lime);
+  --color-accent-hover: var(--color-lime-hover);
+  --color-accent-foreground: var(--color-charcoal-dark);
+  --color-accent-text: #4d7c0f;
+  --color-accent-soft: #f7fee7;
+  --color-soft-gray: #f3f4f6;
+  --color-border: #e5e7eb;
+  --color-border-strong: #d1d5db;
+  --color-white: #ffffff;
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-surface: #ffffff;
+  --color-background: #f3f4f6;
+  --color-focus-ring: #a3e635;
+  --color-lime-tint: #f2fbdc;
+  font-family: Inter, Avenir, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--color-text-primary);
+  background: var(--color-background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-focus-ring) 55%, transparent);
+  outline-offset: 4px;
+}

@@ -1,0 +1,6 @@
+@JobOrbit.API_HostAddress = https://localhost:7075
+
+GET {{JobOrbit.API_HostAddress}}/api/health
+Accept: application/json
+
+###

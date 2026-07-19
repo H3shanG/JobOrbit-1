@@ -1,0 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+using JobOrbit.Application.DTOs.Jobs;
+namespace JobOrbit.Application.DTOs.AdminDepartments;
+public sealed class AdminDepartmentQuery{public string?Search{get;set;}public int?OrganizationId{get;set;}public string?Status{get;set;}[Range(1,int.MaxValue)]public int Page{get;set;}=1;[Range(1,100)]public int PageSize{get;set;}=10;public string Sort{get;set;}="name";}
+public sealed record AdminDepartmentListItemDto(int DepartmentId,int OrganizationId,string OrganizationName,string Name,string Code,string?Description,string Status,int RecruiterCount,int HiringManagerCount,int ActiveJobCount,DateTime CreatedAt);
+public sealed record AdminDepartmentDetailsDto(int DepartmentId,int OrganizationId,string OrganizationName,string Name,string Code,string?Description,string?Email,string?Phone,string Status,int RecruiterCount,int HiringManagerCount,int ActiveJobCount,int TotalApplicationCount,DateTime CreatedAt,DateTime UpdatedAt);
+public sealed record DepartmentLookupDto(int DepartmentId,int OrganizationId,string Name,string Code,bool IsActive);
+public class SaveDepartmentRequest{[Range(1,int.MaxValue)]public int OrganizationId{get;set;}[Required,MaxLength(150)]public string Name{get;set;}="";[Required,MaxLength(50),DepartmentCode]public string Code{get;set;}="";[MaxLength(1000)]public string?Description{get;set;}[OptionalEmailAddress,MaxLength(320)]public string?Email{get;set;}[OptionalPhone,MaxLength(30)]public string?Phone{get;set;}public bool IsActive{get;set;}=true;}
+public sealed class CreateDepartmentRequest:SaveDepartmentRequest;public sealed class UpdateDepartmentRequest:SaveDepartmentRequest;public sealed class UpdateDepartmentStatusRequest{public bool IsActive{get;set;}[MaxLength(500)]public string?Reason{get;set;}}
+public sealed class DepartmentCodeAttribute:ValidationAttribute{public override bool IsValid(object?value){var s=(value as string)?.Trim();return !string.IsNullOrEmpty(s)&&s.All(c=>char.IsLetterOrDigit(c)||c is '-' or '_');}}
+public sealed class OptionalEmailAddressAttribute:ValidationAttribute{public override bool IsValid(object?value)=>string.IsNullOrWhiteSpace(value as string)||new EmailAddressAttribute().IsValid(value);}
+public sealed class OptionalPhoneAttribute:ValidationAttribute{public override bool IsValid(object?value)=>string.IsNullOrWhiteSpace(value as string)||new PhoneAttribute().IsValid(value);}
+public enum AdminDepartmentOutcome{Success,NotFound,OrganizationNotFound,InactiveOrganization,DuplicateCode,DuplicateName,UnsafeOrganizationMove}
+public sealed record AdminDepartmentResult(AdminDepartmentOutcome Outcome,AdminDepartmentDetailsDto?Department=null);public sealed record AdminDepartmentListResult(bool Valid,PagedResultDto<AdminDepartmentListItemDto>?Result=null,bool OrganizationMissing=false);

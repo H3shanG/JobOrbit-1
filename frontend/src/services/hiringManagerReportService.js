@@ -1,0 +1,2 @@
+import apiClient from '../api/apiClient'
+export async function getHiringManagerReports(params,signal){const paths=['summary','application-trends','hiring-funnel','job-performance','decision-outcomes'];const responses=await Promise.all(paths.map(path=>apiClient.get(`/manager/reports/${path}`,{params,signal})));return{summary:responses[0].data,trends:responses[1].data,funnel:responses[2].data,jobs:responses[3].data,outcomes:responses[4].data}}

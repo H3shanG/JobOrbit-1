@@ -1,0 +1,1 @@
+using JobOrbit.Application.DTOs.AdminAuditLogs;namespace JobOrbit.Application.Interfaces;public interface IAdminAuditLogRepository{Task<AdminAuditLogListResult>ListAsync(AdminAuditLogQuery query,CancellationToken token=default);Task<AdminAuditLogDetailsDto?>DetailsAsync(int id,CancellationToken token=default);}

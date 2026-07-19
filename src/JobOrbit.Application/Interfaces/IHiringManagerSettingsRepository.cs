@@ -1,0 +1,1 @@
+using JobOrbit.Domain.Entities;namespace JobOrbit.Application.Interfaces;public interface IHiringManagerSettingsRepository{Task<HiringManagerProfile?>GetAsync(int userId,CancellationToken token=default);Task SaveAsync(CancellationToken token=default);}

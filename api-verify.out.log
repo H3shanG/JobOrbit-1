@@ -1,0 +1,844 @@
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (38ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [o].[Id], [o].[CreatedAt], [o].[Description], [o].[Location], [o].[Name], [o].[UpdatedAt], [o].[WebsiteUrl]
+      FROM [Organizations] AS [o]
+      WHERE [o].[Name] = N'NovaTech Solutions'
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (16ms) [Parameters=[@organization_Id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [d].[Id], [d].[CreatedAt], [d].[Description], [d].[Name], [d].[OrganizationId], [d].[UpdatedAt]
+      FROM [Departments] AS [d]
+      WHERE [d].[OrganizationId] = @organization_Id AND [d].[Name] = N'Engineering'
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [u].[Id], [u].[ApplicationStatusNotifications], [u].[CreatedAt], [u].[Email], [u].[EmailNotifications], [u].[FirstName], [u].[InterviewReminders], [u].[IsActive], [u].[JobRecommendationNotifications], [u].[LastName], [u].[PasswordHash], [u].[Role], [u].[UpdatedAt]
+      FROM [Users] AS [u]
+      WHERE [u].[Email] = N'recruiter@joborbit.test'
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[@recruiter_Id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [r].[Id], [r].[CandidateStatusNotifications], [r].[CreatedAt], [r].[EmailNotifications], [r].[InterviewNotifications], [r].[JobApplicationNotifications], [r].[JobTitle], [r].[OrganizationId], [r].[PhoneNumber], [r].[UpdatedAt], [r].[UserId]
+      FROM [RecruiterProfiles] AS [r]
+      WHERE [r].[UserId] = @recruiter_Id
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [u].[Id], [u].[ApplicationStatusNotifications], [u].[CreatedAt], [u].[Email], [u].[EmailNotifications], [u].[FirstName], [u].[InterviewReminders], [u].[IsActive], [u].[JobRecommendationNotifications], [u].[LastName], [u].[PasswordHash], [u].[Role], [u].[UpdatedAt]
+      FROM [Users] AS [u]
+      WHERE [u].[Email] = N'manager@joborbit.test'
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@manager_Id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT CASE
+          WHEN EXISTS (
+              SELECT 1
+              FROM [HiringManagerProfiles] AS [h]
+              WHERE [h].[UserId] = @manager_Id) THEN CAST(1 AS bit)
+          ELSE CAST(0 AS bit)
+      END
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [u].[Id], [u].[ApplicationStatusNotifications], [u].[CreatedAt], [u].[Email], [u].[EmailNotifications], [u].[FirstName], [u].[InterviewReminders], [u].[IsActive], [u].[JobRecommendationNotifications], [u].[LastName], [u].[PasswordHash], [u].[Role], [u].[UpdatedAt]
+      FROM [Users] AS [u]
+      WHERE [u].[Email] = N'admin@joborbit.test'
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@skillNames1='?' (Size = 150), @skillNames2='?' (Size = 150), @skillNames3='?' (Size = 150), @skillNames4='?' (Size = 150), @skillNames5='?' (Size = 150), @skillNames6='?' (Size = 150), @skillNames7='?' (Size = 150), @skillNames8='?' (Size = 150), @skillNames9='?' (Size = 150), @skillNames10='?' (Size = 150)], CommandType='Text', CommandTimeout='30']
+      SELECT [s].[Id], [s].[CreatedAt], [s].[Description], [s].[Name], [s].[UpdatedAt]
+      FROM [Skills] AS [s]
+      WHERE [s].[Name] IN (@skillNames1, @skillNames2, @skillNames3, @skillNames4, @skillNames5, @skillNames6, @skillNames7, @skillNames8, @skillNames9, @skillNames10)
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (5ms) [Parameters=[@_8__locals1_organization_Id='?' (DbType = Int32), @seedJob_Title='?' (Size = 200)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [j].[Id], [j].[ClosingAt], [j].[CreatedAt], [j].[DepartmentId], [j].[Description], [j].[EmploymentType], [j].[Location], [j].[OrganizationId], [j].[PublishedAt], [j].[RecruiterProfileId], [j].[Requirements], [j].[Responsibilities], [j].[SalaryMaximum], [j].[SalaryMinimum], [j].[Status], [j].[Title], [j].[UpdatedAt]
+      FROM [JobPostings] AS [j]
+      WHERE [j].[OrganizationId] = @_8__locals1_organization_Id AND [j].[Title] = @seedJob_Title
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@job_Id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [j].[SkillId]
+      FROM [JobSkills] AS [j]
+      WHERE [j].[JobPostingId] = @job_Id
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@_8__locals1_organization_Id='?' (DbType = Int32), @seedJob_Title='?' (Size = 200)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [j].[Id], [j].[ClosingAt], [j].[CreatedAt], [j].[DepartmentId], [j].[Description], [j].[EmploymentType], [j].[Location], [j].[OrganizationId], [j].[PublishedAt], [j].[RecruiterProfileId], [j].[Requirements], [j].[Responsibilities], [j].[SalaryMaximum], [j].[SalaryMinimum], [j].[Status], [j].[Title], [j].[UpdatedAt]
+      FROM [JobPostings] AS [j]
+      WHERE [j].[OrganizationId] = @_8__locals1_organization_Id AND [j].[Title] = @seedJob_Title
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@job_Id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [j].[SkillId]
+      FROM [JobSkills] AS [j]
+      WHERE [j].[JobPostingId] = @job_Id
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@_8__locals1_organization_Id='?' (DbType = Int32), @seedJob_Title='?' (Size = 200)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [j].[Id], [j].[ClosingAt], [j].[CreatedAt], [j].[DepartmentId], [j].[Description], [j].[EmploymentType], [j].[Location], [j].[OrganizationId], [j].[PublishedAt], [j].[RecruiterProfileId], [j].[Requirements], [j].[Responsibilities], [j].[SalaryMaximum], [j].[SalaryMinimum], [j].[Status], [j].[Title], [j].[UpdatedAt]
+      FROM [JobPostings] AS [j]
+      WHERE [j].[OrganizationId] = @_8__locals1_organization_Id AND [j].[Title] = @seedJob_Title
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@job_Id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [j].[SkillId]
+      FROM [JobSkills] AS [j]
+      WHERE [j].[JobPostingId] = @job_Id
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@_8__locals1_organization_Id='?' (DbType = Int32), @seedJob_Title='?' (Size = 200)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [j].[Id], [j].[ClosingAt], [j].[CreatedAt], [j].[DepartmentId], [j].[Description], [j].[EmploymentType], [j].[Location], [j].[OrganizationId], [j].[PublishedAt], [j].[RecruiterProfileId], [j].[Requirements], [j].[Responsibilities], [j].[SalaryMaximum], [j].[SalaryMinimum], [j].[Status], [j].[Title], [j].[UpdatedAt]
+      FROM [JobPostings] AS [j]
+      WHERE [j].[OrganizationId] = @_8__locals1_organization_Id AND [j].[Title] = @seedJob_Title
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@job_Id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [j].[SkillId]
+      FROM [JobSkills] AS [j]
+      WHERE [j].[JobPostingId] = @job_Id
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@_8__locals1_organization_Id='?' (DbType = Int32), @seedJob_Title='?' (Size = 200)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [j].[Id], [j].[ClosingAt], [j].[CreatedAt], [j].[DepartmentId], [j].[Description], [j].[EmploymentType], [j].[Location], [j].[OrganizationId], [j].[PublishedAt], [j].[RecruiterProfileId], [j].[Requirements], [j].[Responsibilities], [j].[SalaryMaximum], [j].[SalaryMinimum], [j].[Status], [j].[Title], [j].[UpdatedAt]
+      FROM [JobPostings] AS [j]
+      WHERE [j].[OrganizationId] = @_8__locals1_organization_Id AND [j].[Title] = @seedJob_Title
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@job_Id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [j].[SkillId]
+      FROM [JobSkills] AS [j]
+      WHERE [j].[JobPostingId] = @job_Id
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5181
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\hesha\OneDrive\Desktop\JobOrbitAI\src\JobOrbit.API
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+      Failed to determine the https port for redirect.
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@normalizedEmail='?' (Size = 320)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [u].[Id], [u].[ApplicationStatusNotifications], [u].[CreatedAt], [u].[Email], [u].[EmailNotifications], [u].[FirstName], [u].[InterviewReminders], [u].[IsActive], [u].[JobRecommendationNotifications], [u].[LastName], [u].[PasswordHash], [u].[Role], [u].[UpdatedAt]
+      FROM [Users] AS [u]
+      WHERE [u].[Email] = @normalizedEmail
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (9ms) [Parameters=[@p='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [u0].[Id] AS [UserId], [u0].[FirstName] + N' ' + [u0].[LastName] AS [FullName], [u0].[Email], CASE
+          WHEN [u0].[Role] = 3 THEN N'Admin'
+          ELSE CASE [u0].[Role]
+              WHEN 1 THEN N'Candidate'
+              WHEN 2 THEN N'Recruiter'
+              WHEN 3 THEN N'Administrator'
+              WHEN 4 THEN N'HiringManager'
+              ELSE CAST([u0].[Role] AS nvarchar(max))
+          END
+      END AS [Role], CASE
+          WHEN [u0].[IsActive] = CAST(1 AS bit) THEN N'Active'
+          ELSE N'Inactive'
+      END AS [Status], CASE
+          WHEN [r].[Id] IS NOT NULL THEN [o].[Name]
+          WHEN [h].[Id] IS NOT NULL THEN [o0].[Name]
+      END AS [OrganizationName], CASE
+          WHEN [h].[Id] IS NOT NULL AND [d].[Id] IS NOT NULL THEN [d].[Name]
+      END AS [DepartmentName], [u0].[CreatedAt]
+      FROM (
+          SELECT [u].[Id], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[LastName], [u].[Role]
+          FROM [Users] AS [u]
+          ORDER BY [u].[CreatedAt] DESC
+          OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY
+      ) AS [u0]
+      LEFT JOIN [RecruiterProfiles] AS [r] ON [u0].[Id] = [r].[UserId]
+      LEFT JOIN [Organizations] AS [o] ON [r].[OrganizationId] = [o].[Id]
+      LEFT JOIN [HiringManagerProfiles] AS [h] ON [u0].[Id] = [h].[UserId]
+      LEFT JOIN [Organizations] AS [o0] ON [h].[OrganizationId] = [o0].[Id]
+      LEFT JOIN [Departments] AS [d] ON [h].[DepartmentId] = [d].[Id]
+      ORDER BY [u0].[CreatedAt] DESC
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (14ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [s0].[Id], [s0].[FirstName], [s0].[LastName], [s0].[c], [s0].[Email], [s0].[c0], [s0].[c1], [s0].[c2], [s0].[c3], [s0].[c4], [s0].[DepartmentId], [s0].[c5], [s0].[CreatedAt], [s0].[UpdatedAt], [s0].[Headline], [s0].[Education], [s0].[c6], [s0].[Id0], [s0].[Id1], [s0].[Id2], [s0].[Id3], [s0].[Id4], [s0].[Id5], [s1].[Name], [s1].[Id], [s1].[Id0], [s0].[c7]
+      FROM (
+          SELECT TOP(2) [u].[Id], [u].[FirstName], [u].[LastName], [u].[FirstName] + N' ' + [u].[LastName] AS [c], [u].[Email], CASE
+              WHEN [c].[Id] IS NOT NULL THEN [c].[PhoneNumber]
+              WHEN [r].[Id] IS NOT NULL THEN [r].[PhoneNumber]
+              WHEN [h].[Id] IS NOT NULL THEN [h].[PhoneNumber]
+          END AS [c0], CASE
+              WHEN [u].[Role] = 3 THEN N'Admin'
+              ELSE CASE [u].[Role]
+                  WHEN 1 THEN N'Candidate'
+                  WHEN 2 THEN N'Recruiter'
+                  WHEN 3 THEN N'Administrator'
+                  WHEN 4 THEN N'HiringManager'
+                  ELSE CAST([u].[Role] AS nvarchar(max))
+              END
+          END AS [c1], CASE
+              WHEN [u].[IsActive] = CAST(1 AS bit) THEN N'Active'
+              ELSE N'Inactive'
+          END AS [c2], CASE
+              WHEN [r].[Id] IS NOT NULL THEN [r].[OrganizationId]
+              WHEN [h].[Id] IS NOT NULL THEN [h].[OrganizationId]
+          END AS [c3], CASE
+              WHEN [r].[Id] IS NOT NULL THEN [o].[Name]
+              WHEN [h].[Id] IS NOT NULL THEN [o0].[Name]
+          END AS [c4], [h].[DepartmentId], CASE
+              WHEN [h].[Id] IS NOT NULL AND [d].[Id] IS NOT NULL THEN [d].[Name]
+          END AS [c5], [u].[CreatedAt], [u].[UpdatedAt], [c].[Headline], [c].[Education], CASE
+              WHEN [c].[Id] IS NULL THEN CAST(1 AS bit)
+              ELSE CAST(0 AS bit)
+          END AS [c6], CASE
+              WHEN [r].[Id] IS NOT NULL THEN [r].[JobTitle]
+              WHEN [h].[Id] IS NOT NULL THEN [h].[JobTitle]
+          END AS [c7], [c].[Id] AS [Id0], [r].[Id] AS [Id1], [h].[Id] AS [Id2], [o].[Id] AS [Id3], [o0].[Id] AS [Id4], [d].[Id] AS [Id5]
+          FROM [Users] AS [u]
+          LEFT JOIN [CandidateProfiles] AS [c] ON [u].[Id] = [c].[UserId]
+          LEFT JOIN [RecruiterProfiles] AS [r] ON [u].[Id] = [r].[UserId]
+          LEFT JOIN [HiringManagerProfiles] AS [h] ON [u].[Id] = [h].[UserId]
+          LEFT JOIN [Organizations] AS [o] ON [r].[OrganizationId] = [o].[Id]
+          LEFT JOIN [Organizations] AS [o0] ON [h].[OrganizationId] = [o0].[Id]
+          LEFT JOIN [Departments] AS [d] ON [h].[DepartmentId] = [d].[Id]
+          WHERE [u].[Id] = @id
+      ) AS [s0]
+      LEFT JOIN (
+          SELECT [s].[Name], [c0].[Id], [s].[Id] AS [Id0], [c0].[CandidateProfileId]
+          FROM [CandidateSkills] AS [c0]
+          INNER JOIN [Skills] AS [s] ON [c0].[SkillId] = [s].[Id]
+      ) AS [s1] ON [s0].[Id0] = [s1].[CandidateProfileId]
+      ORDER BY [s0].[Id], [s0].[Id0], [s0].[Id1], [s0].[Id2], [s0].[Id3], [s0].[Id4], [s0].[Id5], [s1].[Id]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@normalizedEmail='?' (Size = 320)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [u].[Id], [u].[ApplicationStatusNotifications], [u].[CreatedAt], [u].[Email], [u].[EmailNotifications], [u].[FirstName], [u].[InterviewReminders], [u].[IsActive], [u].[JobRecommendationNotifications], [u].[LastName], [u].[PasswordHash], [u].[Role], [u].[UpdatedAt]
+      FROM [Users] AS [u]
+      WHERE [u].[Email] = @normalizedEmail
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [u].[Id], [u].[ApplicationStatusNotifications], [u].[CreatedAt], [u].[Email], [u].[EmailNotifications], [u].[FirstName], [u].[InterviewReminders], [u].[IsActive], [u].[JobRecommendationNotifications], [u].[LastName], [u].[PasswordHash], [u].[Role], [u].[UpdatedAt]
+      FROM [Users] AS [u]
+      WHERE [u].[Id] = @userId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [h].[OrganizationId], [h].[DepartmentId]
+      FROM [HiringManagerProfiles] AS [h]
+      INNER JOIN [Users] AS [u] ON [h].[UserId] = [u].[Id]
+      WHERE [h].[UserId] = @userId AND [u].[IsActive] = CAST(1 AS bit)
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [h].[OrganizationId], [h].[DepartmentId]
+      FROM [HiringManagerProfiles] AS [h]
+      INNER JOIN [Users] AS [u] ON [h].[UserId] = [u].[Id]
+      WHERE [h].[UserId] = @userId AND [u].[IsActive] = CAST(1 AS bit) AND [u].[Role] = 4
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [h].[OrganizationId], [h].[DepartmentId]
+      FROM [HiringManagerProfiles] AS [h]
+      INNER JOIN [Users] AS [u] ON [h].[UserId] = [u].[Id]
+      WHERE [h].[UserId] = @id AND [u].[IsActive] = CAST(1 AS bit)
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [h].[OrganizationId], [h].[DepartmentId]
+      FROM [HiringManagerProfiles] AS [h]
+      INNER JOIN [Users] AS [u] ON [h].[UserId] = [u].[Id]
+      WHERE [h].[UserId] = @userId AND [u].[Role] = 4 AND [u].[IsActive] = CAST(1 AS bit)
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (15ms) [Parameters=[@s_Item1='?' (DbType = Int32), @s_Item2='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      WHERE [j0].[OrganizationId] = @s_Item1 AND [j0].[DepartmentId] = @s_Item2 AND [j].[Status] = 3
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (13ms) [Parameters=[@scope_OrganizationId='?' (DbType = Int32), @scope_DepartmentId='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      WHERE [j0].[OrganizationId] = @scope_OrganizationId AND [j0].[DepartmentId] = @scope_DepartmentId AND [j].[Status] IN (3, 4)
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (17ms) [Parameters=[@userId='?' (DbType = Int32), @scope_Value_Item1='?' (DbType = Int32), @scope_Value_Item2='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [CandidateEvaluations] AS [c]
+      INNER JOIN [JobApplications] AS [j] ON [c].[JobApplicationId] = [j].[Id]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      WHERE [c].[EvaluatorUserId] = @userId AND [j0].[OrganizationId] = @scope_Value_Item1 AND [j0].[DepartmentId] = @scope_Value_Item2
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (15ms) [Parameters=[@p='?' (DbType = Int32), @scope_Item1='?' (DbType = Int32), @scope_Item2='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [s].[Id] AS [ApplicationId], [u].[FirstName] + N' ' + [u].[LastName] AS [CandidateName], [c].[Headline] AS [ProfessionalTitle], [s].[Title] AS [JobTitle], [s].[AppliedAt] AS [AppliedOn]
+      FROM (
+          SELECT TOP(@p) [j].[Id], [j].[AppliedAt], [j].[CandidateProfileId], [j0].[Title]
+          FROM [JobApplications] AS [j]
+          INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+          WHERE [j0].[OrganizationId] = @scope_Item1 AND [j0].[DepartmentId] = @scope_Item2 AND [j].[Status] IN (3, 4)
+          ORDER BY [j].[AppliedAt] DESC
+      ) AS [s]
+      INNER JOIN [CandidateProfiles] AS [c] ON [s].[CandidateProfileId] = [c].[Id]
+      INNER JOIN [Users] AS [u] ON [c].[UserId] = [u].[Id]
+      ORDER BY [s].[AppliedAt] DESC
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (7ms) [Parameters=[@userId='?' (DbType = Int32), @scope_Value_Item1='?' (DbType = Int32), @scope_Value_Item2='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT AVG([c].[OverallScore])
+      FROM [CandidateEvaluations] AS [c]
+      INNER JOIN [JobApplications] AS [j] ON [c].[JobApplicationId] = [j].[Id]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      WHERE [c].[EvaluatorUserId] = @userId AND [j0].[OrganizationId] = @scope_Value_Item1 AND [j0].[DepartmentId] = @scope_Value_Item2
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (6ms) [Parameters=[@scope_OrganizationId='?' (DbType = Int32), @scope_DepartmentId='?' (DbType = Int32), @today='?' (DbType = DateTime2), @AddDays='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      INNER JOIN [Interviews] AS [i] ON [j].[Id] = [i].[JobApplicationId]
+      WHERE [j0].[OrganizationId] = @scope_OrganizationId AND [j0].[DepartmentId] = @scope_DepartmentId AND [i].[ScheduledAt] >= @today AND [i].[ScheduledAt] < @AddDays AND [i].[Status] <> 3
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (17ms) [Parameters=[@s_Item1='?' (DbType = Int32), @s_Item2='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      WHERE [j0].[OrganizationId] = @s_Item1 AND [j0].[DepartmentId] = @s_Item2 AND EXISTS (
+          SELECT 1
+          FROM [Interviews] AS [i]
+          WHERE [j].[Id] = [i].[JobApplicationId] AND [i].[Status] = 2)
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (8ms) [Parameters=[@scope_Item1='?' (DbType = Int32), @scope_Item2='?' (DbType = Int32), @userId='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      WHERE [j0].[OrganizationId] = @scope_Item1 AND [j0].[DepartmentId] = @scope_Item2 AND [j].[Status] IN (3, 4) AND NOT EXISTS (
+          SELECT 1
+          FROM [CandidateEvaluations] AS [c]
+          WHERE [j].[Id] = [c].[JobApplicationId] AND [c].[EvaluatorUserId] = @userId)
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (12ms) [Parameters=[@s_Item1='?' (DbType = Int32), @s_Item2='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      WHERE [j0].[OrganizationId] = @s_Item1 AND [j0].[DepartmentId] = @s_Item2 AND EXISTS (
+          SELECT 1
+          FROM [CandidateEvaluations] AS [c]
+          WHERE [j].[Id] = [c].[JobApplicationId] AND [c].[EvaluatorUserId] IS NOT NULL)
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (13ms) [Parameters=[@scope_OrganizationId='?' (DbType = Int32), @scope_DepartmentId='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      LEFT JOIN [ApplicationHiringDecisions] AS [a] ON [j].[Id] = [a].[JobApplicationId]
+      WHERE [j0].[OrganizationId] = @scope_OrganizationId AND [j0].[DepartmentId] = @scope_DepartmentId AND EXISTS (
+          SELECT 1
+          FROM [CandidateEvaluations] AS [c]
+          WHERE [j].[Id] = [c].[JobApplicationId] AND [c].[EvaluatorUserId] IS NOT NULL) AND [a].[Id] IS NULL
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (5ms) [Parameters=[@s_Item1='?' (DbType = Int32), @s_Item2='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      LEFT JOIN [ApplicationHiringDecisions] AS [a] ON [j].[Id] = [a].[JobApplicationId]
+      WHERE [j0].[OrganizationId] = @s_Item1 AND [j0].[DepartmentId] = @s_Item2 AND [a].[Id] IS NOT NULL AND [a].[Decision] = 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (6ms) [Parameters=[@scope_OrganizationId='?' (DbType = Int32), @scope_DepartmentId='?' (DbType = Int32), @month='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      LEFT JOIN [ApplicationHiringDecisions] AS [a] ON [j].[Id] = [a].[JobApplicationId]
+      WHERE [j0].[OrganizationId] = @scope_OrganizationId AND [j0].[DepartmentId] = @scope_DepartmentId AND [a].[Id] IS NOT NULL AND [a].[Decision] = 2 AND [a].[DecidedAt] >= @month
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (5ms) [Parameters=[@s_Item1='?' (DbType = Int32), @s_Item2='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      WHERE [j0].[OrganizationId] = @s_Item1 AND [j0].[DepartmentId] = @s_Item2 AND [j].[Status] = 6
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[@s_Item1='?' (DbType = Int32), @s_Item2='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      WHERE [j0].[OrganizationId] = @s_Item1 AND [j0].[DepartmentId] = @s_Item2 AND [j].[Status] = 7
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (9ms) [Parameters=[@userId='?' (DbType = Int32), @scope_Value_Item1='?' (DbType = Int32), @scope_Value_Item2='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT CASE [c].[Recommendation]
+          WHEN 1 THEN N'Proceed'
+          WHEN 2 THEN N'Hold'
+          WHEN 3 THEN N'Reject'
+          ELSE ISNULL(CAST([c].[Recommendation] AS nvarchar(max)), N'')
+      END AS [Recommendation], COUNT(*) AS [Count]
+      FROM [CandidateEvaluations] AS [c]
+      INNER JOIN [JobApplications] AS [j] ON [c].[JobApplicationId] = [j].[Id]
+      INNER JOIN [JobPostings] AS [j0] ON [j].[JobPostingId] = [j0].[Id]
+      WHERE [c].[EvaluatorUserId] = @userId AND [j0].[OrganizationId] = @scope_Value_Item1 AND [j0].[DepartmentId] = @scope_Value_Item2 AND [c].[Recommendation] IS NOT NULL
+      GROUP BY [c].[Recommendation]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@normalizedEmail='?' (Size = 320)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [u].[Id], [u].[ApplicationStatusNotifications], [u].[CreatedAt], [u].[Email], [u].[EmailNotifications], [u].[FirstName], [u].[InterviewReminders], [u].[IsActive], [u].[JobRecommendationNotifications], [u].[LastName], [u].[PasswordHash], [u].[Role], [u].[UpdatedAt]
+      FROM [Users] AS [u]
+      WHERE [u].[Email] = @normalizedEmail
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@userId='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(2) [u].[Id], [u].[ApplicationStatusNotifications], [u].[CreatedAt], [u].[Email], [u].[EmailNotifications], [u].[FirstName], [u].[InterviewReminders], [u].[IsActive], [u].[JobRecommendationNotifications], [u].[LastName], [u].[PasswordHash], [u].[Role], [u].[UpdatedAt]
+      FROM [Users] AS [u]
+      WHERE [u].[Id] = @userId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+      WHERE [u].[Role] = 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [j].[Status] AS [Key], COUNT(*) AS [Count]
+      FROM [JobApplications] AS [j]
+      GROUP BY [j].[Status]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+      WHERE [u].[Role] = 2
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[@f='?' (DbType = DateTime2), @to='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+      SELECT [u0].[Year], [u0].[Month], COUNT(CASE
+          WHEN [u0].[Role] = 1 THEN 1
+      END) AS [Candidates], COUNT(CASE
+          WHEN [u0].[Role] = 2 THEN 1
+      END) AS [Recruiters], COUNT(CASE
+          WHEN [u0].[Role] = 4 THEN 1
+      END) AS [Managers], COUNT(CASE
+          WHEN [u0].[Role] = 3 THEN 1
+      END) AS [Admins]
+      FROM (
+          SELECT [u].[Role], DATEPART(year, [u].[CreatedAt]) AS [Year], DATEPART(month, [u].[CreatedAt]) AS [Month]
+          FROM [Users] AS [u]
+          WHERE [u].[CreatedAt] >= @f AND [u].[CreatedAt] <= @to
+      ) AS [u0]
+      GROUP BY [u0].[Year], [u0].[Month]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+      WHERE [u].[Role] = 4
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@from='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+      SELECT [j0].[Year], [j0].[Month], COUNT(*) AS [Count]
+      FROM (
+          SELECT DATEPART(year, [j].[AppliedAt]) AS [Year], DATEPART(month, [j].[AppliedAt]) AS [Month]
+          FROM [JobApplications] AS [j]
+          WHERE [j].[AppliedAt] >= @from
+      ) AS [j0]
+      GROUP BY [j0].[Year], [j0].[Month]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobPostings] AS [j]
+      WHERE [j].[Status] = 2 AND ([j].[ClosingAt] IS NULL OR [j].[ClosingAt] > GETUTCDATE())
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (13ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Interviews] AS [i]
+      WHERE [i].[Status] <> 3
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+      WHERE [j].[Status] = 6
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Organizations] AS [o]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Organizations] AS [o]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (6ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [a0].[Id] AS [ActivityId], [a0].[Action], [a0].[Action] + N' on ' + [a0].[EntityName] AS [Description], CASE
+          WHEN [u].[Id] IS NULL THEN N'System'
+          ELSE COALESCE([u].[FirstName], N'') + N' ' + COALESCE([u].[LastName], N'')
+      END AS [ActorName], CASE
+          WHEN [u].[Id] IS NULL THEN NULL
+          ELSE CASE [u].[Role]
+              WHEN 1 THEN N'Candidate'
+              WHEN 2 THEN N'Recruiter'
+              WHEN 3 THEN N'Administrator'
+              WHEN 4 THEN N'HiringManager'
+              ELSE ISNULL(CAST([u].[Role] AS nvarchar(max)), N'')
+          END
+      END AS [ActorRole], [a0].[CreatedAt] AS [OccurredAt]
+      FROM (
+          SELECT TOP(@p) [a].[Id], [a].[Action], [a].[CreatedAt], [a].[EntityName], [a].[UserId]
+          FROM [AuditLogs] AS [a]
+          ORDER BY [a].[CreatedAt] DESC
+      ) AS [a0]
+      LEFT JOIN [Users] AS [u] ON [a0].[UserId] = [u].[Id]
+      ORDER BY [a0].[CreatedAt] DESC
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@month='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+      WHERE [u].[CreatedAt] >= @month
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobPostings] AS [j]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [JobApplications] AS [j]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Interviews] AS [i]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [CandidateEvaluations] AS [c]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@p='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [u0].[Id] AS [UserId], [u0].[FirstName] + N' ' + [u0].[LastName] AS [FullName], [u0].[Email], CASE
+          WHEN [u0].[Role] = 3 THEN N'Admin'
+          ELSE CASE [u0].[Role]
+              WHEN 1 THEN N'Candidate'
+              WHEN 2 THEN N'Recruiter'
+              WHEN 3 THEN N'Administrator'
+              WHEN 4 THEN N'HiringManager'
+              ELSE CAST([u0].[Role] AS nvarchar(max))
+          END
+      END AS [Role], CASE
+          WHEN [u0].[IsActive] = CAST(1 AS bit) THEN N'Active'
+          ELSE N'Inactive'
+      END AS [Status], CASE
+          WHEN [r].[Id] IS NOT NULL THEN [o].[Name]
+          WHEN [h].[Id] IS NOT NULL THEN [o0].[Name]
+      END AS [OrganizationName], CASE
+          WHEN [h].[Id] IS NOT NULL AND [d].[Id] IS NOT NULL THEN [d].[Name]
+      END AS [DepartmentName], [u0].[CreatedAt]
+      FROM (
+          SELECT [u].[Id], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[LastName], [u].[Role]
+          FROM [Users] AS [u]
+          ORDER BY [u].[CreatedAt] DESC
+          OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY
+      ) AS [u0]
+      LEFT JOIN [RecruiterProfiles] AS [r] ON [u0].[Id] = [r].[UserId]
+      LEFT JOIN [Organizations] AS [o] ON [r].[OrganizationId] = [o].[Id]
+      LEFT JOIN [HiringManagerProfiles] AS [h] ON [u0].[Id] = [h].[UserId]
+      LEFT JOIN [Organizations] AS [o0] ON [h].[OrganizationId] = [o0].[Id]
+      LEFT JOIN [Departments] AS [d] ON [h].[DepartmentId] = [d].[Id]
+      ORDER BY [u0].[CreatedAt] DESC
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@p='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [u0].[Id] AS [UserId], [u0].[FirstName] + N' ' + [u0].[LastName] AS [FullName], [u0].[Email], CASE
+          WHEN [u0].[Role] = 3 THEN N'Admin'
+          ELSE CASE [u0].[Role]
+              WHEN 1 THEN N'Candidate'
+              WHEN 2 THEN N'Recruiter'
+              WHEN 3 THEN N'Administrator'
+              WHEN 4 THEN N'HiringManager'
+              ELSE CAST([u0].[Role] AS nvarchar(max))
+          END
+      END AS [Role], CASE
+          WHEN [u0].[IsActive] = CAST(1 AS bit) THEN N'Active'
+          ELSE N'Inactive'
+      END AS [Status], CASE
+          WHEN [r].[Id] IS NOT NULL THEN [o].[Name]
+          WHEN [h].[Id] IS NOT NULL THEN [o0].[Name]
+      END AS [OrganizationName], CASE
+          WHEN [h].[Id] IS NOT NULL AND [d].[Id] IS NOT NULL THEN [d].[Name]
+      END AS [DepartmentName], [u0].[CreatedAt]
+      FROM (
+          SELECT [u].[Id], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[LastName], [u].[Role]
+          FROM [Users] AS [u]
+          ORDER BY [u].[CreatedAt] DESC
+          OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY
+      ) AS [u0]
+      LEFT JOIN [RecruiterProfiles] AS [r] ON [u0].[Id] = [r].[UserId]
+      LEFT JOIN [Organizations] AS [o] ON [r].[OrganizationId] = [o].[Id]
+      LEFT JOIN [HiringManagerProfiles] AS [h] ON [u0].[Id] = [h].[UserId]
+      LEFT JOIN [Organizations] AS [o0] ON [h].[OrganizationId] = [o0].[Id]
+      LEFT JOIN [Departments] AS [d] ON [h].[DepartmentId] = [d].[Id]
+      ORDER BY [u0].[CreatedAt] DESC
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (7ms) [Parameters=[@p='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [u0].[Id] AS [UserId], [u0].[FirstName] + N' ' + [u0].[LastName] AS [FullName], [u0].[Email], CASE
+          WHEN [u0].[Role] = 3 THEN N'Admin'
+          ELSE CASE [u0].[Role]
+              WHEN 1 THEN N'Candidate'
+              WHEN 2 THEN N'Recruiter'
+              WHEN 3 THEN N'Administrator'
+              WHEN 4 THEN N'HiringManager'
+              ELSE CAST([u0].[Role] AS nvarchar(max))
+          END
+      END AS [Role], CASE
+          WHEN [u0].[IsActive] = CAST(1 AS bit) THEN N'Active'
+          ELSE N'Inactive'
+      END AS [Status], CASE
+          WHEN [r].[Id] IS NOT NULL THEN [o].[Name]
+          WHEN [h].[Id] IS NOT NULL THEN [o0].[Name]
+      END AS [OrganizationName], CASE
+          WHEN [h].[Id] IS NOT NULL AND [d].[Id] IS NOT NULL THEN [d].[Name]
+      END AS [DepartmentName], [u0].[CreatedAt]
+      FROM (
+          SELECT [u].[Id], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[LastName], [u].[Role]
+          FROM [Users] AS [u]
+          ORDER BY [u].[CreatedAt]
+          OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY
+      ) AS [u0]
+      LEFT JOIN [RecruiterProfiles] AS [r] ON [u0].[Id] = [r].[UserId]
+      LEFT JOIN [Organizations] AS [o] ON [r].[OrganizationId] = [o].[Id]
+      LEFT JOIN [HiringManagerProfiles] AS [h] ON [u0].[Id] = [h].[UserId]
+      LEFT JOIN [Organizations] AS [o0] ON [h].[OrganizationId] = [o0].[Id]
+      LEFT JOIN [Departments] AS [d] ON [h].[DepartmentId] = [d].[Id]
+      ORDER BY [u0].[CreatedAt]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@p='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [u0].[Id] AS [UserId], [u0].[FirstName] + N' ' + [u0].[LastName] AS [FullName], [u0].[Email], CASE
+          WHEN [u0].[Role] = 3 THEN N'Admin'
+          ELSE CASE [u0].[Role]
+              WHEN 1 THEN N'Candidate'
+              WHEN 2 THEN N'Recruiter'
+              WHEN 3 THEN N'Administrator'
+              WHEN 4 THEN N'HiringManager'
+              ELSE CAST([u0].[Role] AS nvarchar(max))
+          END
+      END AS [Role], CASE
+          WHEN [u0].[IsActive] = CAST(1 AS bit) THEN N'Active'
+          ELSE N'Inactive'
+      END AS [Status], CASE
+          WHEN [r].[Id] IS NOT NULL THEN [o].[Name]
+          WHEN [h].[Id] IS NOT NULL THEN [o0].[Name]
+      END AS [OrganizationName], CASE
+          WHEN [h].[Id] IS NOT NULL AND [d].[Id] IS NOT NULL THEN [d].[Name]
+      END AS [DepartmentName], [u0].[CreatedAt]
+      FROM (
+          SELECT [u].[Id], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[LastName], [u].[Role]
+          FROM [Users] AS [u]
+          ORDER BY [u].[CreatedAt] DESC
+          OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY
+      ) AS [u0]
+      LEFT JOIN [RecruiterProfiles] AS [r] ON [u0].[Id] = [r].[UserId]
+      LEFT JOIN [Organizations] AS [o] ON [r].[OrganizationId] = [o].[Id]
+      LEFT JOIN [HiringManagerProfiles] AS [h] ON [u0].[Id] = [h].[UserId]
+      LEFT JOIN [Organizations] AS [o0] ON [h].[OrganizationId] = [o0].[Id]
+      LEFT JOIN [Departments] AS [d] ON [h].[DepartmentId] = [d].[Id]
+      ORDER BY [u0].[CreatedAt] DESC
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [s0].[Id], [s0].[FirstName], [s0].[LastName], [s0].[c], [s0].[Email], [s0].[c0], [s0].[c1], [s0].[c2], [s0].[c3], [s0].[c4], [s0].[DepartmentId], [s0].[c5], [s0].[CreatedAt], [s0].[UpdatedAt], [s0].[Headline], [s0].[Education], [s0].[c6], [s0].[Id0], [s0].[Id1], [s0].[Id2], [s0].[Id3], [s0].[Id4], [s0].[Id5], [s1].[Name], [s1].[Id], [s1].[Id0], [s0].[c7]
+      FROM (
+          SELECT TOP(2) [u].[Id], [u].[FirstName], [u].[LastName], [u].[FirstName] + N' ' + [u].[LastName] AS [c], [u].[Email], CASE
+              WHEN [c].[Id] IS NOT NULL THEN [c].[PhoneNumber]
+              WHEN [r].[Id] IS NOT NULL THEN [r].[PhoneNumber]
+              WHEN [h].[Id] IS NOT NULL THEN [h].[PhoneNumber]
+          END AS [c0], CASE
+              WHEN [u].[Role] = 3 THEN N'Admin'
+              ELSE CASE [u].[Role]
+                  WHEN 1 THEN N'Candidate'
+                  WHEN 2 THEN N'Recruiter'
+                  WHEN 3 THEN N'Administrator'
+                  WHEN 4 THEN N'HiringManager'
+                  ELSE CAST([u].[Role] AS nvarchar(max))
+              END
+          END AS [c1], CASE
+              WHEN [u].[IsActive] = CAST(1 AS bit) THEN N'Active'
+              ELSE N'Inactive'
+          END AS [c2], CASE
+              WHEN [r].[Id] IS NOT NULL THEN [r].[OrganizationId]
+              WHEN [h].[Id] IS NOT NULL THEN [h].[OrganizationId]
+          END AS [c3], CASE
+              WHEN [r].[Id] IS NOT NULL THEN [o].[Name]
+              WHEN [h].[Id] IS NOT NULL THEN [o0].[Name]
+          END AS [c4], [h].[DepartmentId], CASE
+              WHEN [h].[Id] IS NOT NULL AND [d].[Id] IS NOT NULL THEN [d].[Name]
+          END AS [c5], [u].[CreatedAt], [u].[UpdatedAt], [c].[Headline], [c].[Education], CASE
+              WHEN [c].[Id] IS NULL THEN CAST(1 AS bit)
+              ELSE CAST(0 AS bit)
+          END AS [c6], CASE
+              WHEN [r].[Id] IS NOT NULL THEN [r].[JobTitle]
+              WHEN [h].[Id] IS NOT NULL THEN [h].[JobTitle]
+          END AS [c7], [c].[Id] AS [Id0], [r].[Id] AS [Id1], [h].[Id] AS [Id2], [o].[Id] AS [Id3], [o0].[Id] AS [Id4], [d].[Id] AS [Id5]
+          FROM [Users] AS [u]
+          LEFT JOIN [CandidateProfiles] AS [c] ON [u].[Id] = [c].[UserId]
+          LEFT JOIN [RecruiterProfiles] AS [r] ON [u].[Id] = [r].[UserId]
+          LEFT JOIN [HiringManagerProfiles] AS [h] ON [u].[Id] = [h].[UserId]
+          LEFT JOIN [Organizations] AS [o] ON [r].[OrganizationId] = [o].[Id]
+          LEFT JOIN [Organizations] AS [o0] ON [h].[OrganizationId] = [o0].[Id]
+          LEFT JOIN [Departments] AS [d] ON [h].[DepartmentId] = [d].[Id]
+          WHERE [u].[Id] = @id
+      ) AS [s0]
+      LEFT JOIN (
+          SELECT [s].[Name], [c0].[Id], [s].[Id] AS [Id0], [c0].[CandidateProfileId]
+          FROM [CandidateSkills] AS [c0]
+          INNER JOIN [Skills] AS [s] ON [c0].[SkillId] = [s].[Id]
+      ) AS [s1] ON [s0].[Id0] = [s1].[CandidateProfileId]
+      ORDER BY [s0].[Id], [s0].[Id0], [s0].[Id1], [s0].[Id2], [s0].[Id3], [s0].[Id4], [s0].[Id5], [s1].[Id]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [s0].[Id], [s0].[FirstName], [s0].[LastName], [s0].[c], [s0].[Email], [s0].[c0], [s0].[c1], [s0].[c2], [s0].[c3], [s0].[c4], [s0].[DepartmentId], [s0].[c5], [s0].[CreatedAt], [s0].[UpdatedAt], [s0].[Headline], [s0].[Education], [s0].[c6], [s0].[Id0], [s0].[Id1], [s0].[Id2], [s0].[Id3], [s0].[Id4], [s0].[Id5], [s1].[Name], [s1].[Id], [s1].[Id0], [s0].[c7]
+      FROM (
+          SELECT TOP(2) [u].[Id], [u].[FirstName], [u].[LastName], [u].[FirstName] + N' ' + [u].[LastName] AS [c], [u].[Email], CASE
+              WHEN [c].[Id] IS NOT NULL THEN [c].[PhoneNumber]
+              WHEN [r].[Id] IS NOT NULL THEN [r].[PhoneNumber]
+              WHEN [h].[Id] IS NOT NULL THEN [h].[PhoneNumber]
+          END AS [c0], CASE
+              WHEN [u].[Role] = 3 THEN N'Admin'
+              ELSE CASE [u].[Role]
+                  WHEN 1 THEN N'Candidate'
+                  WHEN 2 THEN N'Recruiter'
+                  WHEN 3 THEN N'Administrator'
+                  WHEN 4 THEN N'HiringManager'
+                  ELSE CAST([u].[Role] AS nvarchar(max))
+              END
+          END AS [c1], CASE
+              WHEN [u].[IsActive] = CAST(1 AS bit) THEN N'Active'
+              ELSE N'Inactive'
+          END AS [c2], CASE
+              WHEN [r].[Id] IS NOT NULL THEN [r].[OrganizationId]
+              WHEN [h].[Id] IS NOT NULL THEN [h].[OrganizationId]
+          END AS [c3], CASE
+              WHEN [r].[Id] IS NOT NULL THEN [o].[Name]
+              WHEN [h].[Id] IS NOT NULL THEN [o0].[Name]
+          END AS [c4], [h].[DepartmentId], CASE
+              WHEN [h].[Id] IS NOT NULL AND [d].[Id] IS NOT NULL THEN [d].[Name]
+          END AS [c5], [u].[CreatedAt], [u].[UpdatedAt], [c].[Headline], [c].[Education], CASE
+              WHEN [c].[Id] IS NULL THEN CAST(1 AS bit)
+              ELSE CAST(0 AS bit)
+          END AS [c6], CASE
+              WHEN [r].[Id] IS NOT NULL THEN [r].[JobTitle]
+              WHEN [h].[Id] IS NOT NULL THEN [h].[JobTitle]
+          END AS [c7], [c].[Id] AS [Id0], [r].[Id] AS [Id1], [h].[Id] AS [Id2], [o].[Id] AS [Id3], [o0].[Id] AS [Id4], [d].[Id] AS [Id5]
+          FROM [Users] AS [u]
+          LEFT JOIN [CandidateProfiles] AS [c] ON [u].[Id] = [c].[UserId]
+          LEFT JOIN [RecruiterProfiles] AS [r] ON [u].[Id] = [r].[UserId]
+          LEFT JOIN [HiringManagerProfiles] AS [h] ON [u].[Id] = [h].[UserId]
+          LEFT JOIN [Organizations] AS [o] ON [r].[OrganizationId] = [o].[Id]
+          LEFT JOIN [Organizations] AS [o0] ON [h].[OrganizationId] = [o0].[Id]
+          LEFT JOIN [Departments] AS [d] ON [h].[DepartmentId] = [d].[Id]
+          WHERE [u].[Id] = @id
+      ) AS [s0]
+      LEFT JOIN (
+          SELECT [s].[Name], [c0].[Id], [s].[Id] AS [Id0], [c0].[CandidateProfileId]
+          FROM [CandidateSkills] AS [c0]
+          INNER JOIN [Skills] AS [s] ON [c0].[SkillId] = [s].[Id]
+      ) AS [s1] ON [s0].[Id0] = [s1].[CandidateProfileId]
+      ORDER BY [s0].[Id], [s0].[Id0], [s0].[Id1], [s0].[Id2], [s0].[Id3], [s0].[Id4], [s0].[Id5], [s1].[Id]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@p='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [u0].[Id] AS [UserId], [u0].[FirstName] + N' ' + [u0].[LastName] AS [FullName], [u0].[Email], CASE
+          WHEN [u0].[Role] = 3 THEN N'Admin'
+          ELSE CASE [u0].[Role]
+              WHEN 1 THEN N'Candidate'
+              WHEN 2 THEN N'Recruiter'
+              WHEN 3 THEN N'Administrator'
+              WHEN 4 THEN N'HiringManager'
+              ELSE CAST([u0].[Role] AS nvarchar(max))
+          END
+      END AS [Role], CASE
+          WHEN [u0].[IsActive] = CAST(1 AS bit) THEN N'Active'
+          ELSE N'Inactive'
+      END AS [Status], CASE
+          WHEN [r].[Id] IS NOT NULL THEN [o].[Name]
+          WHEN [h].[Id] IS NOT NULL THEN [o0].[Name]
+      END AS [OrganizationName], CASE
+          WHEN [h].[Id] IS NOT NULL AND [d].[Id] IS NOT NULL THEN [d].[Name]
+      END AS [DepartmentName], [u0].[CreatedAt]
+      FROM (
+          SELECT [u].[Id], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[LastName], [u].[Role]
+          FROM [Users] AS [u]
+          ORDER BY [u].[CreatedAt] DESC
+          OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY
+      ) AS [u0]
+      LEFT JOIN [RecruiterProfiles] AS [r] ON [u0].[Id] = [r].[UserId]
+      LEFT JOIN [Organizations] AS [o] ON [r].[OrganizationId] = [o].[Id]
+      LEFT JOIN [HiringManagerProfiles] AS [h] ON [u0].[Id] = [h].[UserId]
+      LEFT JOIN [Organizations] AS [o0] ON [h].[OrganizationId] = [o0].[Id]
+      LEFT JOIN [Departments] AS [d] ON [h].[DepartmentId] = [d].[Id]
+      ORDER BY [u0].[CreatedAt] DESC
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@p='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [u0].[Id] AS [UserId], [u0].[FirstName] + N' ' + [u0].[LastName] AS [FullName], [u0].[Email], CASE
+          WHEN [u0].[Role] = 3 THEN N'Admin'
+          ELSE CASE [u0].[Role]
+              WHEN 1 THEN N'Candidate'
+              WHEN 2 THEN N'Recruiter'
+              WHEN 3 THEN N'Administrator'
+              WHEN 4 THEN N'HiringManager'
+              ELSE CAST([u0].[Role] AS nvarchar(max))
+          END
+      END AS [Role], CASE
+          WHEN [u0].[IsActive] = CAST(1 AS bit) THEN N'Active'
+          ELSE N'Inactive'
+      END AS [Status], CASE
+          WHEN [r].[Id] IS NOT NULL THEN [o].[Name]
+          WHEN [h].[Id] IS NOT NULL THEN [o0].[Name]
+      END AS [OrganizationName], CASE
+          WHEN [h].[Id] IS NOT NULL AND [d].[Id] IS NOT NULL THEN [d].[Name]
+      END AS [DepartmentName], [u0].[CreatedAt]
+      FROM (
+          SELECT [u].[Id], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[LastName], [u].[Role]
+          FROM [Users] AS [u]
+          ORDER BY [u].[CreatedAt] DESC
+          OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY
+      ) AS [u0]
+      LEFT JOIN [RecruiterProfiles] AS [r] ON [u0].[Id] = [r].[UserId]
+      LEFT JOIN [Organizations] AS [o] ON [r].[OrganizationId] = [o].[Id]
+      LEFT JOIN [HiringManagerProfiles] AS [h] ON [u0].[Id] = [h].[UserId]
+      LEFT JOIN [Organizations] AS [o0] ON [h].[OrganizationId] = [o0].[Id]
+      LEFT JOIN [Departments] AS [d] ON [h].[DepartmentId] = [d].[Id]
+      ORDER BY [u0].[CreatedAt] DESC
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*)
+      FROM [Users] AS [u]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@p='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [u0].[Id] AS [UserId], [u0].[FirstName] + N' ' + [u0].[LastName] AS [FullName], [u0].[Email], CASE
+          WHEN [u0].[Role] = 3 THEN N'Admin'
+          ELSE CASE [u0].[Role]
+              WHEN 1 THEN N'Candidate'
+              WHEN 2 THEN N'Recruiter'
+              WHEN 3 THEN N'Administrator'
+              WHEN 4 THEN N'HiringManager'
+              ELSE CAST([u0].[Role] AS nvarchar(max))
+          END
+      END AS [Role], CASE
+          WHEN [u0].[IsActive] = CAST(1 AS bit) THEN N'Active'
+          ELSE N'Inactive'
+      END AS [Status], CASE
+          WHEN [r].[Id] IS NOT NULL THEN [o].[Name]
+          WHEN [h].[Id] IS NOT NULL THEN [o0].[Name]
+      END AS [OrganizationName], CASE
+          WHEN [h].[Id] IS NOT NULL AND [d].[Id] IS NOT NULL THEN [d].[Name]
+      END AS [DepartmentName], [u0].[CreatedAt]
+      FROM (
+          SELECT [u].[Id], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[IsActive], [u].[LastName], [u].[Role]
+          FROM [Users] AS [u]
+          ORDER BY [u].[CreatedAt] DESC
+          OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY
+      ) AS [u0]
+      LEFT JOIN [RecruiterProfiles] AS [r] ON [u0].[Id] = [r].[UserId]
+      LEFT JOIN [Organizations] AS [o] ON [r].[OrganizationId] = [o].[Id]
+      LEFT JOIN [HiringManagerProfiles] AS [h] ON [u0].[Id] = [h].[UserId]
+      LEFT JOIN [Organizations] AS [o0] ON [h].[OrganizationId] = [o0].[Id]
+      LEFT JOIN [Departments] AS [d] ON [h].[DepartmentId] = [d].[Id]
+      ORDER BY [u0].[CreatedAt] DESC

@@ -1,0 +1,8 @@
+using JobOrbit.Application.DTOs.Jobs;
+namespace JobOrbit.Application.DTOs.AdminAuditLogs;
+public sealed class AdminAuditLogQuery{public string? Search{get;set;}public string? Action{get;set;}public string? EntityType{get;set;}public int? EntityId{get;set;}public int? ActorUserId{get;set;}public string? ActorRole{get;set;}public string? Severity{get;set;}public bool? IsSuccess{get;set;}public DateTime? From{get;set;}public DateTime? To{get;set;}public int Page{get;set;}=1;public int PageSize{get;set;}=25;public string Sort{get;set;}="newest";}
+public sealed record AdminAuditLogListItemDto(int AuditLogId,int? ActorUserId,string ActorName,string? ActorRole,string Action,string ActionDisplayName,string EntityType,int? EntityId,string? EntityDisplayName,string Description,string Severity,bool IsSuccess,string? IpAddress,DateTime OccurredAt);
+public sealed record AdminAuditActorDto(int? UserId,string Name,string? Role);
+public sealed record AdminAuditLogDetailsDto(int AuditLogId,AdminAuditActorDto Actor,string Action,string ActionDisplayName,string EntityType,int? EntityId,string? EntityDisplayName,string Description,string Severity,bool IsSuccess,object? OldValues,object? NewValues,object? Metadata,string? IpAddress,string? UserAgent,string? CorrelationId,DateTime OccurredAt);
+public sealed record AuditLogActionLookupDto(string Value,string DisplayName,string Category);public sealed record AuditLogEntityTypeLookupDto(string Value,string DisplayName);
+public sealed record AdminAuditLogListResult(bool Valid,PagedResultDto<AdminAuditLogListItemDto>? Result=null,string? Error=null);
