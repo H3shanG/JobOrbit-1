@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext'
 import { getJob } from '../services/jobService'
 import { getCandidateJobMatch } from '../services/jobMatchingService'
 import MatchAnalysis from '../components/MatchAnalysis'
+import JobAssistantCard from '../components/JobAssistantCard'
 import styles from './CandidateJobDetails.module.css'
 
 const formatDate = (value) => value ? new Intl.DateTimeFormat(undefined, { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date(value)) : 'Open'
@@ -64,6 +65,7 @@ export default function CandidateJobDetails() {
           {job.requirements && <section><h2>Requirements</h2><p className={styles.copy}>{job.requirements}</p></section>}
           <section><h2>Skills</h2>{job.skills?.length ? <div className={styles.skills}>{job.skills.map((skill) => <span key={skill}>{skill}</span>)}</div> : <p className={styles.muted}>No specific skills listed.</p>}</section>
           <MatchAnalysis match={match}/>
+          <JobAssistantCard jobId={job.jobId}/>
           {job.companySummary && <section><h2>About {job.companyName}</h2><p className={styles.copy}>{job.companySummary}</p></section>}
         </div>
         <aside className={styles.summaryCard}>

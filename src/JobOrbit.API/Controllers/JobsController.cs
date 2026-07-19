@@ -1,6 +1,7 @@
 using JobOrbit.Application.DTOs.Jobs;
 using JobOrbit.Application.DTOs.Applications;
 using JobOrbit.Application.Interfaces;
+using JobOrbit.API.Services;
 using JobOrbit.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ namespace JobOrbit.API.Controllers;
 [Authorize(Roles = nameof(UserRole.Candidate))]
 public sealed class JobsController(
     IJobService jobService,
+    IJobAssistantService jobAssistantService,
     IJobApplicationService jobApplicationService) : ControllerBase
 {
     [HttpGet]
@@ -46,6 +48,51 @@ public sealed class JobsController(
 
         var job = await jobService.GetJobDetailsAsync(userId, jobId, cancellationToken);
         return job is null ? NotFound() : Ok(job);
+    }
+
+    [HttpPost("{jobId:int}/assistant")]
+    [ProducesResponseType<JobAssistantResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ValidationProblemDetails>(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<JobAssistantResponse>> AskAssistant(
+        int jobId,
+        [FromBody] JobAssistantRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (!int.TryParse(User.FindFirst("UserId")?.Value, out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var mode = JobAssistantModes.Normalize(request.Mode);
+        if (mode is null)
+        {
+            ModelState.AddModelError(
+                nameof(request.Mode),
+                "Supported assistant modes are explain, daily_work, and interview_questions.");
+            return ValidationProblem(ModelState);
+        }
+
+        var job = await jobService.GetJobDetailsAsync(userId, jobId, cancellationToken);
+        if (job is null)
+        {
+            return NotFound();
+        }
+        try
+        {
+            return Ok(await jobAssistantService.GenerateAsync(job, mode, cancellationToken));
+        }
+        catch (JobAssistantUnavailableException ex)
+        {
+            return StatusCode(StatusCodes.Status503ServiceUnavailable, new ProblemDetails
+            {
+                Status = StatusCodes.Status503ServiceUnavailable,
+                Title = "AI assistant unavailable",
+                Detail = ex.Message
+            });
+        }
     }
 
     [HttpPost("{jobId:int}/applications")]

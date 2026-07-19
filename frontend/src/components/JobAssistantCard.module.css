@@ -1,0 +1,145 @@
+.card{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  gap:18px;
+  padding:22px;
+  border:1px solid #dfe7f3;
+  border-radius:14px;
+  background:
+    radial-gradient(circle at top right, rgba(163,230,53,.16), transparent 34%),
+    linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  box-shadow:0 6px 18px rgba(23,57,107,.08)
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  gap:18px
+}
+
+.kicker{
+  display:inline-flex;
+  margin-bottom:8px;
+  padding:5px 10px;
+  border-radius:999px;
+  background:#ecfccb;
+  color:#4d7c0f;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-transform:uppercase
+}
+
+.header h2{
+  margin:0 0 6px;
+  color:#17243a;
+  font-size:18px
+}
+
+.header p{
+  margin:0;
+  color:#64748b;
+  font-size:12px;
+  line-height:1.7
+}
+
+.badge{
+  align-self:flex-start;
+  padding:8px 12px;
+  border:1px solid #d9f99d;
+  border-radius:999px;
+  background:#f7fee7;
+  color:#4d7c0f;
+  font-size:10px;
+  font-weight:800
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px
+}
+
+.actions button{
+  padding:10px 14px;
+  border:1px solid #d6e0ef;
+  border-radius:999px;
+  background:#fff;
+  color:#223049;
+  font:inherit;
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+  transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease
+}
+
+.actions button:hover:not(:disabled){
+  border-color:#84cc16;
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(132,204,22,.12)
+}
+
+.actions button:disabled{
+  opacity:.72;
+  cursor:wait
+}
+
+.chat{
+  display:grid;
+  gap:12px
+}
+
+.message{
+  max-width:100%;
+  padding:14px 16px;
+  border-radius:16px;
+  font-size:11px;
+  line-height:1.75
+}
+
+.assistant{
+  border:1px solid #dce6f4;
+  background:#fff
+}
+
+.user{
+  justify-self:end;
+  max-width:min(82%, 420px);
+  background:#1f2937;
+  color:#fff;
+  box-shadow:0 10px 24px rgba(17,24,39,.14)
+}
+
+.message p,
+.message ul,
+.message ol{
+  margin:0
+}
+
+.message ul,
+.message ol{
+  margin-top:10px;
+  padding-left:18px
+}
+
+.message li + li{
+  margin-top:6px
+}
+
+.message small{
+  display:block;
+  margin-top:10px;
+  color:#64748b;
+  font-size:10px
+}
+
+@media(max-width:720px){
+  .header{
+    flex-direction:column
+  }
+
+  .user{
+    max-width:100%
+  }
+}
