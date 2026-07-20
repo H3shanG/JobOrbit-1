@@ -66,6 +66,7 @@ builder.Services.AddMemoryCache();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddHttpClient<IJobAssistantService, JobAssistantService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<ICandidateDashboardService, CandidateDashboardService>();
 builder.Services.AddScoped<ICandidateDashboardRepository, CandidateDashboardRepository>();
